@@ -1,7 +1,7 @@
 using UnityEngine;
 
 public class BallController : MonoBehaviour
-{ 
+{
     public float speed = 5.0f; // 速度
     private Rigidbody rb;
 
@@ -18,17 +18,30 @@ public class BallController : MonoBehaviour
         Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
         rb.AddForce(movement * speed);
     }
-    
-    void OnTriggerEnter(Collider other)
-    {
-        // 親オブジェクトが存在するかどうかをチェックし、存在しなければ直接otherを使用
-        Transform checkTransform = other.transform.parent != null ? other.transform.parent : other.transform;
 
-        // 親オブジェクト、またはそのオブジェクト自体がCollectibleタグを持っているかチェック
-        if (checkTransform.CompareTag("Collectible"))
+    void OnCollisionEnter(Collision collision)
+    {
+        AttachObject(collision.transform);
+    }
+
+    //void OnTriggerEnter(Collider other)
+    //{
+    //    AttachObject(other.transform);
+    //}
+
+    private void AttachObject(Transform hitTransform)
+    {
+        // 親オブジェクトが存在するかチェックし、存在しなければ直接hitTransformを使用
+        Transform checkTransform = hitTransform.parent != null ? hitTransform.parent : hitTransform;
+
+        // 特定のタグ"NotAttachable"を持つオブジェクトを除外
+        if (!checkTransform.CompareTag("NotAttachable"))
         {
-            // タグがCollectibleであれば、そのオブジェクトを球体の子オブジェクトにする
+            // タグが"NotAttachable"でなければ、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
+
+            // さらに衝突したオブジェクトのisTriggerをtrueに設定して、他の衝突を防ぐ
+            checkTransform.GetComponent<Collider>().isTrigger = true;
         }
     }
 }
