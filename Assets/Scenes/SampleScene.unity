@@ -38,7 +38,6 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571337, b: 0.3069219, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -269,8 +268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61613cfa37c1e45d5ab9387224ac4a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  turnSpeed: 50
+  speed: 5
 --- !u!1 &130527229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1100,10 +1098,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a41847755d829456089c21b41376e9ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ball: {fileID: 119154659}
-  distance: 5
-  height: 3
-  damping: 5
+  target: {fileID: 119154659}
+  offset: {x: 0, y: 5, z: -10}
+  smoothSpeed: 0.125
+  minHeight: 1
 --- !u!1 &1301292236
 GameObject:
   m_ObjectHideFlags: 0
