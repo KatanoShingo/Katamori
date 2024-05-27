@@ -1,15 +1,25 @@
 using UnityEngine;
 
 public class FollowBall : MonoBehaviour
-{ 
+{
     public Transform target; // ターゲットとなる球体
     public Vector3 offset = new Vector3(0, 5, -10); // カメラとターゲットの距離と方向のオフセット
     public float smoothSpeed = 0.125f; // カメラの動きを滑らかにするための速度
     public float minHeight = 1.0f; // カメラの最小高さ
+    public float rotationSpeed = 70.0f; // カメラの回転速度
+
+    private float currentAngle = 0.0f; // カメラの現在の角度
 
     void LateUpdate()
     {
-        Vector3 desiredPosition = target.position + offset;
+        float horizontalInput = Input.GetAxis("Horizontal");
+
+        // 入力に応じてカメラの角度を更新
+        currentAngle += horizontalInput * rotationSpeed * Time.deltaTime;
+
+        // カメラの位置を計算
+        Quaternion rotation = Quaternion.Euler(0, currentAngle, 0);
+        Vector3 desiredPosition = target.position + rotation * offset;
         Vector3 smoothedPosition = Vector3.Lerp(transform.position, desiredPosition, smoothSpeed);
 
         // カメラとターゲットの間の視線をチェック
