@@ -23,22 +23,28 @@ public class BallController : MonoBehaviour
 
     void OnCollisionEnter(Collision collision)
     {
-        AttachObject(collision.transform);
+        AttachObject(collision.transform, collision);
     }
 
-    private void AttachObject(Transform hitTransform)
+    private void AttachObject(Transform hitTransform, Collision collision)
     {
         // 親オブジェクトが存在するかチェックし、存在しなければ直接hitTransformを使用
-        Transform checkTransform = hitTransform.parent != null ? hitTransform.parent : hitTransform;
+        Transform checkTransform = hitTransform.parent == null ? hitTransform : hitTransform.parent;
 
+            Debug.Log((checkTransform.GetComponent<Tag>()!=null).ToString());
         // 特定のタグ"NotAttachable"を持つオブジェクトを除外し、許容サイズの範囲内であるか確認
-        if (!checkTransform.CompareTag("NotAttachable") && checkTransform.localScale.y <= currentMaxSizeY)
+        if (checkTransform.CompareTag("Collectible") && checkTransform.localScale.y <= currentMaxSizeY)
         {
-            // タグが"NotAttachable"でなければ、そのオブジェクトを球体の子オブジェクトにする
+            Debug.Log("当たった");
+            // タグが"Collectible"であれば、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
 
-            // さらに衝突したオブジェクトのisTriggerをtrueに設定して、他の衝突を防ぐ
-            checkTransform.GetComponent<Collider>().isTrigger = true;
+            // 衝突したオブジェクトのコライダー（親があれば親のコライダー、なければそのオブジェクトのコライダー）のisTriggerをtrueに設定
+            Collider targetCollider = hitTransform.GetComponent<Collider>() ? hitTransform.GetComponent<Collider>() : checkTransform.GetComponent<Collider>();
+            if (targetCollider != null)
+            {
+                targetCollider.isTrigger = true;
+            }
 
             // カウンターを増やす
             attachedObjectsCount++;
