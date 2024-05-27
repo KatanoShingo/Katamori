@@ -31,11 +31,9 @@ public class BallController : MonoBehaviour
         // 親オブジェクトが存在するかチェックし、存在しなければ直接hitTransformを使用
         Transform checkTransform = hitTransform.parent == null ? hitTransform : hitTransform.parent;
 
-            Debug.Log((checkTransform.GetComponent<Tag>()!=null).ToString());
         // 特定のタグ"NotAttachable"を持つオブジェクトを除外し、許容サイズの範囲内であるか確認
         if (checkTransform.CompareTag("Collectible") && checkTransform.localScale.y <= currentMaxSizeY)
         {
-            Debug.Log("当たった");
             // タグが"Collectible"であれば、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
 
