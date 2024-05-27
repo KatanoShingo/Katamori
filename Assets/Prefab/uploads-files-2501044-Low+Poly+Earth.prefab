@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 61.45034
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 1.0673099
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 24.283907
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       propertyPath: m_LocalRotation.w
@@ -60,6 +60,9 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 7249410919445217912}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 3080833575628928998}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
       insertIndex: -1
@@ -73,6 +76,19 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: b61b1c4f069e44812ae7076cea90d795, type: 3}
   m_PrefabInstance: {fileID: 2439299467073540298}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7249410919445217912
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3250270863181409691}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18869f655f96747079707c3466c2cdb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fallThreshold: -50
 --- !u!114 &3080833575628928998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,8 +101,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61613cfa37c1e45d5ab9387224ac4a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 10
-  turnSpeed: 50
+  speed: 5
+  cameraTransform: {fileID: 0}
 --- !u!135 &8357394143119610321
 SphereCollider:
   m_ObjectHideFlags: 0
