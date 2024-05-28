@@ -5,13 +5,17 @@ public class BallController : MonoBehaviour
     public float speed = 5.0f; // 速度
     private Rigidbody rb;
     public Transform cameraTransform; // カメラのTransform
+    public float colliderGrowthRate = 0.5f; // スフィアコライダーの成長率
 
     private int attachedObjectsCount = 0; // くっついたオブジェクトの数をカウント
     private int currentMaxSizeY = 1; // 現在のsize.yの最大許容値
 
+    private SphereCollider sphereCollider; // スフィアコライダー
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        sphereCollider = GetComponent<SphereCollider>();
     }
 
     void FixedUpdate()
@@ -51,20 +55,21 @@ public class BallController : MonoBehaviour
             // タグが"Collectible"であれば、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
 
-            // 衝突したオブジェクトのコライダー（親があれば親のコライダー、なければそのオブジェクトのコライダー）のisTriggerをtrueに設定
-            Collider targetCollider = hitTransform.GetComponent<Collider>() ?? checkTransform.GetComponent<Collider>();
-            if (targetCollider != null)
+            // 衝突したオブジェクト及びその親の全てのコライダーを取得してisTriggerをtrueに設定
+            Collider[] colliders = checkTransform.GetComponentsInChildren<Collider>();
+            foreach (Collider col in colliders)
             {
-                targetCollider.isTrigger = true;
+                col.isTrigger = true;
             }
 
             // カウンターを増やす
             attachedObjectsCount++;
 
-            // 10個ごとに許容されるsize.yの最大値を増やす
+            // 10個ごとに許容されるsize.yの最大値を増やし、スフィアコライダーを大きくする
             if (attachedObjectsCount % 10 == 0)
             {
                 currentMaxSizeY++;
+                sphereCollider.radius += colliderGrowthRate;
             }
         }
     }
