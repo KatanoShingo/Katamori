@@ -6,16 +6,25 @@ public class BallController : MonoBehaviour
     private Rigidbody rb;
     public Transform cameraTransform; // カメラのTransform
     public float colliderGrowthRate = 0.5f; // スフィアコライダーの成長率
+    public AudioClip attachSound; // くっつくときの効果音
 
     private int attachedObjectsCount = 0; // くっついたオブジェクトの数をカウント
     private int currentMaxSizeY = 1; // 現在のsize.yの最大許容値
 
     private SphereCollider sphereCollider; // スフィアコライダー
+    private AudioSource audioSource; // AudioSource
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
+        audioSource = GetComponent<AudioSource>(); // AudioSourceを取得
+
+        // AudioSourceがアタッチされていない場合は追加
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void FixedUpdate()
@@ -64,6 +73,12 @@ public class BallController : MonoBehaviour
 
             // カウンターを増やす
             attachedObjectsCount++;
+
+            // 効果音を鳴らす
+            if (attachSound != null && audioSource != null)
+            {
+                audioSource.PlayOneShot(attachSound);
+            }
 
             // 10個ごとに許容されるsize.yの最大値を増やし、スフィアコライダーを大きくする
             if (attachedObjectsCount % 10 == 0)
