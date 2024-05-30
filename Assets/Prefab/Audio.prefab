@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3365397170584781377}
   - component: {fileID: 4734497697085977815}
   m_Layer: 0
-  m_Name: BGM
+  m_Name: Audio
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,5 +141,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17aee31e5596e4c5abf09872d14eec12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioSource: {fileID: 3365397170584781377}
-  volumeChangeSpeed: 0.1
+  audioSourceBgm: {fileID: 3365397170584781377}
+  audioSourceSe: {fileID: 0}
