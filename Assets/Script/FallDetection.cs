@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class FallDetection : MonoBehaviour
 {
-    public float fallThreshold = -50.0f; // 奈落の高さのしきい値
+    float fallThreshold = -50.0f; // 奈落の高さのしきい値
 
     void Update()
     {

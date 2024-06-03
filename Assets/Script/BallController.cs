@@ -2,29 +2,23 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float speed = 5.0f; // 速度
-    private Rigidbody rb;
-    public Transform cameraTransform; // カメラのTransform
-    public float colliderGrowthRate = 0.5f; // スフィアコライダーの成長率
-    public AudioClip attachSound; // くっつくときの効果音
+    [SerializeField] Transform cameraTransform; // カメラのTransform
+    Rigidbody rb;
+    AudioSource audioSource; // AudioSource
+    SphereCollider sphereCollider; // スフィアコライダー
+    
+    float colliderGrowthRate = 0.5f; // スフィアコライダーの成長率
+    float speed = 5.0f; // 速度
 
-    private int attachedObjectsCount = 0; // くっついたオブジェクトの数をカウント
-    private int currentMaxSizeY = 1; // 現在のsize.yの最大許容値
+    int attachedObjectsCount = 0; // くっついたオブジェクトの数をカウント
+    int currentMaxSizeY = 1; // 現在のsize.yの最大許容値
 
-    private SphereCollider sphereCollider; // スフィアコライダー
-    private AudioSource audioSource; // AudioSource
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         sphereCollider = GetComponent<SphereCollider>();
         audioSource = GetComponent<AudioSource>(); // AudioSourceを取得
-
-        // AudioSourceがアタッチされていない場合は追加
-        if (audioSource == null)
-        {
-            audioSource = gameObject.AddComponent<AudioSource>();
-        }
     }
 
     void FixedUpdate()
@@ -58,8 +52,8 @@ public class BallController : MonoBehaviour
         // 親オブジェクトが存在するかチェックし、存在しなければ直接hitTransformを使用
         Transform checkTransform = hitTransform.parent == null ? hitTransform : hitTransform.parent;
 
-        // 特定のタグ"Collectible"を持つオブジェクトを確認し、許容サイズの範囲内であるかを確認
-        if (checkTransform.CompareTag("Collectible") && checkTransform.localScale.y <= currentMaxSizeY)
+        // 特定のタグ"Collectible"を持つオブジェクトを確認
+        if (checkTransform.CompareTag("Collectible"))
         {
             // タグが"Collectible"であれば、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
@@ -74,11 +68,7 @@ public class BallController : MonoBehaviour
             // カウンターを増やす
             attachedObjectsCount++;
 
-            // 効果音を鳴らす
-            if (attachSound != null && audioSource != null)
-            {
-                audioSource.PlayOneShot(attachSound);
-            }
+            audioSource.PlayOneShot(audioSource.clip);
 
             // 10個ごとに許容されるsize.yの最大値を増やし、スフィアコライダーを大きくする
             if (attachedObjectsCount % 10 == 0)

@@ -91,7 +91,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18869f655f96747079707c3466c2cdb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fallThreshold: -50
 --- !u!114 &3080833575628928998
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -104,10 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61613cfa37c1e45d5ab9387224ac4a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
   cameraTransform: {fileID: 0}
-  colliderGrowthRate: 0.5
-  attachSound: {fileID: 8300000, guid: ebe30b39047ae49658c78f9df18548e6, type: 3}
+  audioSource: {fileID: -4511032658522213852}
 --- !u!135 &8357394143119610321
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -166,7 +163,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: ebe30b39047ae49658c78f9df18548e6, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 0.2
   m_Pitch: 1
