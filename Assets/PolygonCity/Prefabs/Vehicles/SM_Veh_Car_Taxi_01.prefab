@@ -509,7 +509,7 @@ GameObject:
   - component: {fileID: 414190}
   - component: {fileID: 3304360}
   - component: {fileID: 2335232}
-  - component: {fileID: 5913545137858490596}
+  - component: {fileID: 8694273276199554094}
   m_Layer: 0
   m_Name: SM_Veh_Car_Taxi_01
   m_TagString: Collectible
@@ -589,8 +589,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5913545137858490596
-BoxCollider:
+--- !u!64 &8694273276199554094
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -607,9 +607,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.1721284, y: 1.496331, z: 5.165425}
-  m_Center: {x: 0, y: 0.9742627, z: 0.11457075}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: db57e923d75cb6c4e936d5e8caaa9165, type: 3}
 --- !u!1 &176960
 GameObject:
   m_ObjectHideFlags: 0

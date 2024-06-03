@@ -260,7 +260,7 @@ GameObject:
   - component: {fileID: 411938}
   - component: {fileID: 3335030}
   - component: {fileID: 2353994}
-  - component: {fileID: 5152101166425384077}
+  - component: {fileID: 791299246786832639}
   m_Layer: 0
   m_Name: SM_Veh_Car_Small_01
   m_TagString: Collectible
@@ -340,8 +340,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &5152101166425384077
-BoxCollider:
+--- !u!64 &791299246786832639
+MeshCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -358,9 +358,10 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 2.0683348, y: 1.5729153, z: 4.074531}
-  m_Center: {x: -0.012611389, y: 0.9477265, z: 0.12095243}
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 4300000, guid: 5f72e1579cd001244802c30b332dae70, type: 3}
 --- !u!1 &135354
 GameObject:
   m_ObjectHideFlags: 0
