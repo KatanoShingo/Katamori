@@ -9,10 +9,40 @@ public class FollowBall : MonoBehaviour
     float rotationSpeed = 70.0f; // カメラの回転速度
     float offsetMultiplier = 0.1f; // 子オブジェクトの数に応じたオフセットの倍率
     float currentAngle = 0.0f; // カメラの現在の角度
+    float magnification = 50f;
+
+    Vector2 touchStart;
+    Vector2 swipeDelta;
+    bool isDragging;
 
     void LateUpdate()
     {
-        float horizontalInput = Input.GetAxis("Horizontal");
+        float horizontalInput = 0;
+
+        if (DeviceController.IsMobileDevice)
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                touchStart = Input.mousePosition;
+                isDragging = true;
+            }
+            else if (Input.GetMouseButtonUp(0) && isDragging)
+            {
+                swipeDelta = (Vector2)Input.mousePosition - touchStart;
+                isDragging = false;
+
+                // スクリーン幅で割ることでスケール調整
+                horizontalInput = swipeDelta.x / Screen.width;
+
+                horizontalInput *= magnification;
+
+                swipeDelta = Vector2.zero; // スワイプ処理後、デルタをリセット
+            }
+        }
+        else
+        {
+            horizontalInput = Input.GetAxis("Horizontal");
+        }
 
         // 入力に応じてカメラの角度を更新
         currentAngle += horizontalInput * rotationSpeed * Time.deltaTime;
