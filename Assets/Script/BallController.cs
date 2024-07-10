@@ -89,7 +89,7 @@ public class BallController : MonoBehaviour
         Transform checkTransform = hitTransform.parent == null ? hitTransform : hitTransform.parent;
 
         // 特定のタグ"Collectible"を持つオブジェクトを確認
-        if (checkTransform.CompareTag("Collectible"))
+        if (checkTransform.CompareTag("Collectible") || (sphereCollider.radius > 9f && checkTransform.CompareTag("Building")))
         {
             // タグが"Collectible"であれば、そのオブジェクトを球体の子オブジェクトにする
             checkTransform.SetParent(transform);
@@ -107,7 +107,7 @@ public class BallController : MonoBehaviour
             audioSource.PlayOneShot(audioSource.clip);
 
             // 10個ごとに許容されるsize.yの最大値を増やし、スフィアコライダーを大きくする
-            if (attachedObjectsCount % 10 == 0)
+            if (checkTransform.CompareTag("Collectible") && (attachedObjectsCount % 10 == 0))
             {
                 currentMaxSizeY++;
                 sphereCollider.radius += colliderGrowthRate;
